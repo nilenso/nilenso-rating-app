@@ -4,12 +4,13 @@ describe RatingSetsController do
   include Devise::TestHelpers
 
   let(:user) { FactoryGirl.create(:user) }
+  let(:rating_exercise) { FactoryGirl.create(:rating_exercise) }
+
   before(:each) do
     sign_in(user)
   end
 
   describe "GET 'edit'" do
-    let(:rating_exercise) { FactoryGirl.create(:rating_exercise) }
 
     it "returns http success" do
       get 'edit', rating_exercise_id: rating_exercise.id
@@ -42,10 +43,45 @@ describe RatingSetsController do
     end
   end
 
-  describe "GET 'update'" do
-    it "returns http success" do
-      get 'update'
-      response.should be_success
+  describe "PUT 'update'" do
+    it "updates the ratings" do
+      rating_set = FactoryGirl.create(:rating_set)
+      rating = FactoryGirl.create(:rating, rating_set: rating_set)
+      ratings_attributes = { "0" => { :value => 10, :id => rating.id }}
+      put 'update', rating_exercise_id: rating_exercise.id, id: rating_set.id, :rating_set => { ratings_attributes: ratings_attributes }
+      rating.reload.value.should == 10
+    end
+
+    context "when save is successful" do
+      it "sets a flash notice" do
+        rating_set = FactoryGirl.create(:rating_set)
+        put 'update', rating_exercise_id: rating_exercise.id, id: rating_set.id, rating_set: { ratings_attributes: nil }
+        flash[:notice].should_not be_empty
+      end
+
+      it "redirects to the index page" do
+        rating_set = FactoryGirl.create(:rating_set)
+        put 'update', rating_exercise_id: rating_exercise.id, id: rating_set.id, rating_set: { ratings_attributes: nil }
+        response.should redirect_to rating_exercises_path
+      end
+    end
+
+    context "when save is unsuccessful" do
+      before(:each) do
+        RatingSet.any_instance.stub(:update).and_return(false)
+      end
+
+      it "sets a flash error" do
+        rating_set = FactoryGirl.create(:rating_set)
+        put 'update', rating_exercise_id: rating_exercise.id, id: rating_set.id, rating_set: { ratings_attributes: nil }
+        flash[:error].should_not be_empty
+      end
+
+      it "renders the 'edit' template" do
+        rating_set = FactoryGirl.create(:rating_set)
+        put 'update', rating_exercise_id: rating_exercise.id, id: rating_set.id, rating_set: { ratings_attributes: nil }
+        response.should render_template :edit
+      end
     end
   end
 end

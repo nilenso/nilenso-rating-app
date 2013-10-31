@@ -1,2 +1,6 @@
-<h1>RatingSets#edit</h1>
-<p>Find me in app/views/rating_sets/edit.html.erb</p>
+<%= simple_form_for [@rating_exercise, @rating_set] do |f| %>
+  <%= f.simple_fields_for :ratings do |ratings_form| %>
+    <%= ratings_form.input :value %>
+  <% end %>
+  <%= f.button :submit %>
+<% end %>
