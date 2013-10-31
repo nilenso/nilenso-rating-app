@@ -4,5 +4,5 @@ NilensoRatingApp::Application.routes.draw do
     root to: "devise/sessions#new"
   end
 
-  resources :rating_exercise
+  resources :rating_exercises
 end

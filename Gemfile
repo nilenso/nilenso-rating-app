@@ -13,6 +13,8 @@ gem 'jazz_hands'
 gem 'certified'
 gem 'omniauth-openid'
 gem 'omniauth-google-apps'
+gem 'simple_form'
+gem 'factory_girl_rails'
 
 group :development do
   gem 'rspec-rails'
