@@ -4,5 +4,7 @@ NilensoRatingApp::Application.routes.draw do
     root to: "devise/sessions#new"
   end
 
-  resources :rating_exercises
+  resources :rating_exercises, only: [:new, :create, :index] do
+    get 'rate', to: "rating_sets#edit"
+  end
 end

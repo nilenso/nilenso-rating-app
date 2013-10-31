@@ -11,13 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131031101734) do
+ActiveRecord::Schema.define(version: 20131031105334) do
 
   create_table "rating_exercises", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
   end
+
+  create_table "rating_sets", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "rating_exercise_id"
+  end
+
+  add_index "rating_sets", ["rating_exercise_id"], name: "index_rating_sets_on_rating_exercise_id", using: :btree
+  add_index "rating_sets", ["user_id"], name: "index_rating_sets_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

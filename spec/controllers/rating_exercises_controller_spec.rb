@@ -32,11 +32,6 @@ describe RatingExercisesController do
   end
 
   describe "GET 'create'" do
-    it "returns http success" do
-      post 'create', rating_exercise: { name: "Foo" }
-      response.should be_success
-    end
-
     it "creates a RatingExercise" do
       expect { post 'create', rating_exercise: { name: "Foo" } }.to change { RatingExercise.count }.by(1)
     end
@@ -94,7 +89,7 @@ describe RatingExercisesController do
 
     it "redirects to the 'sign_in' page if a user isn't logged in" do
       sign_out(user)
-      get 'new'
+      get 'index'
       response.should redirect_to new_user_session_path
     end
   end
