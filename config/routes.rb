@@ -1,8 +1,6 @@
 NilensoRatingApp::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
-  devise_scope :user do
-    root to: "devise/sessions#new"
-  end
+  root to: "rating_exercises#index"
 
   resources :rating_exercises, only: [:new, :create, :index] do
     get 'rate', to: "rating_sets#edit"
