@@ -14,7 +14,8 @@ class RatingSet < ActiveRecord::Base
 
   def percentage_rating_for_user(user)
     total = ratings.map(&:value).compact.reduce(:+) || 1
-    (rating_for(user).value || 0) / total.to_f * 100
+    rating = rating_for(user).try(:value) || 0
+    rating / total.to_f * 100
   end
 
   def rating_for(user)

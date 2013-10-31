@@ -68,5 +68,11 @@ describe RatingSet do
       FactoryGirl.create(:rating, value: nil, rated_user: second_user, rating_set: rating_set)
       rating_set.percentage_rating_for_user(first_user).should == 0
     end
+
+    it "works okay if some ratings don't exist" do
+      user = FactoryGirl.create(:user)
+      rating_set = FactoryGirl.create(:rating_set)
+      rating_set.percentage_rating_for_user(user).should == 0
+    end
   end
 end
