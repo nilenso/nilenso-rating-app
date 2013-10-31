@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_apps]
 
+  has_many :rating_sets
+
   def self.find_for_googleapps_oauth(access_token, signed_in_resource=nil)
     data = access_token['info']
 
