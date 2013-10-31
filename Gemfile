@@ -9,6 +9,11 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'unicorn-rails'
 gem 'devise'
+gem 'omniauth'
+gem 'jazz_hands'
+gem 'certified'
+gem 'omniauth-openid'
+gem 'omniauth-google-apps'
 
 group :development do
   gem 'rspec-rails'
