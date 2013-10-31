@@ -1,5 +1,8 @@
 <ul>
   <% @rating_exercises.each do |rating_exercise| %>
-    <li><%= rating_exercise.name %></li>
+    <li>
+      <%= rating_exercise.name %>
+      <%= link_to "Rate", rating_exercise_rate_path(rating_exercise.id) %>
+    </li>
   <% end %>
 </ul>
