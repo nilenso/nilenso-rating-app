@@ -1,6 +1,7 @@
 <%= simple_form_for [@rating_exercise, @rating_set] do |f| %>
   <%= f.simple_fields_for :ratings do |ratings_form| %>
-    <%= ratings_form.input :value %>
+    <%= ratings_form.input :value, label: "Value for #{ratings_form.object.rated_user_email}" %>
+    <%= ratings_form.input :rated_user_id, as: :hidden %>
   <% end %>
   <%= f.button :submit %>
 <% end %>

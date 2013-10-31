@@ -2,6 +2,7 @@ class RatingSetsController < ApplicationController
   def edit
     @rating_exercise = RatingExercise.find(params[:rating_exercise_id])
     @rating_set = RatingSet.where(user: current_user, rating_exercise: @rating_exercise).first_or_create
+    @rating_set.initialize_ratings!
   end
 
   def update
@@ -18,6 +19,6 @@ class RatingSetsController < ApplicationController
   private
 
   def rating_set_params
-    params.require(:rating_set).permit(ratings_attributes: [:id, :value])
+    params.require(:rating_set).permit(ratings_attributes: [:id, :value, :rated_user_id])
   end
 end
