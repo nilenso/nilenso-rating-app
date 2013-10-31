@@ -4,7 +4,7 @@ class RatingSet < ActiveRecord::Base
 
   has_many :ratings
 
-  validates_uniqueness_of :user_id, scope: :rating_exercise_id
+  validates_uniqueness_of :user_id, scope: :rating_exercise_id, allow_nil: false
 
   accepts_nested_attributes_for :ratings
 

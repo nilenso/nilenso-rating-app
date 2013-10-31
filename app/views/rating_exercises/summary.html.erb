@@ -1,0 +1,8 @@
+<ul>
+  <% @ratings.all.group_by(&:rated_user_id).each do |user_id, ratings| %>
+    <li>
+      Total points for <%= User.find(user_id).email %>: <%= ratings.map(&:value).reduce(:+) %>
+    </li>
+
+  <% end %>
+</ul>

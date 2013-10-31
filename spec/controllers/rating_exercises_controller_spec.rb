@@ -93,4 +93,14 @@ describe RatingExercisesController do
       response.should redirect_to new_user_session_path
     end
   end
+
+  describe "GET 'summary'" do
+    it "assigns all ratings entered for the exercise" do
+      rating_exercise = FactoryGirl.create(:rating_exercise)
+      rating_set = FactoryGirl.create(:rating_set, rating_exercise: rating_exercise)
+      ratings = FactoryGirl.create_list(:rating, 5, value: 10, rating_set: rating_set)
+      get 'summary', id: rating_exercise.id
+      assigns(:ratings).should == ratings
+    end
+  end
 end

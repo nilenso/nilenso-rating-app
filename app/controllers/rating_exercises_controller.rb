@@ -18,6 +18,11 @@ class RatingExercisesController < ApplicationController
     @rating_exercises = RatingExercise.all
   end
 
+  def summary
+    rating_exercise = RatingExercise.find(params[:id])
+    @ratings = Rating.where(rating_set_id: rating_exercise.rating_sets.pluck(:id))
+  end
+
   private
 
   def rating_exercise_params

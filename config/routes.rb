@@ -4,6 +4,7 @@ NilensoRatingApp::Application.routes.draw do
 
   resources :rating_exercises, only: [:new, :create, :index] do
     get 'rate', to: "rating_sets#edit"
+    member { get 'summary' }
     resources :rating_sets, only: [:update]
   end
 
