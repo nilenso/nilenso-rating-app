@@ -7,7 +7,10 @@
   <% @rating_exercises.each do |rating_exercise| %>
     <li>
       <%= rating_exercise.name %>
+      —
       <%= link_to "Rate", rating_exercise_rate_path(rating_exercise.id) %>
+      /
+      <%= link_to "Summary", summary_rating_exercise_path(rating_exercise.id) %>
     </li>
   <% end %>
 </ul>

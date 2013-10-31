@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :rating do
     value 1
-    rating_set { FactoryGirl.create(:rating_set) }
-    rated_user { FactoryGirl.create(:user) }
+    association :rating_set, factory: :rating_set
+    association :rated_user, factory: :user
   end
 end
