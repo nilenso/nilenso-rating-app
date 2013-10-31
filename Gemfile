@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'unicorn-rails'
+gem 'devise'
 
 group :development do
   gem 'rspec-rails'
