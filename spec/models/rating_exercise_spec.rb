@@ -15,7 +15,8 @@ describe RatingExercise do
       FactoryGirl.create(:rating, value: 1500, rating_set: second_rating_set, rated_user: first_user)
       FactoryGirl.create(:rating, value: 1000, rating_set: second_rating_set, rated_user: second_user)
 
-      rating_exercise.ratings_grouped_by_user.should == { first_user => 85, second_user => 115 }
+      rating_exercise.ratings_grouped_by_user.should == { first_user => 42.5, second_user => 57.5 }
     end
+
   end
 end
